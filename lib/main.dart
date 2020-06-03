@@ -131,9 +131,30 @@ class _LoginState extends State<Login> {
                         ),
                         onPressed: () {
                           //  Criar OBJ contendo dados pra outra tela
-                          var obj = Mensagem(_email, _senha);
-                          Navigator.pushNamed(context, "/perfil",
-                              arguments: obj);
+                          
+                          if (_email.isEmpty || _senha.isEmpty) {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text("Dados inválidos."),
+                                  content: Text("Por favor, tente novamente."),
+                                  actions: <Widget> [
+                                    FlatButton(
+                                      child: Text("OK"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    )
+                                  ],
+                                );
+                              },
+                            );
+                          } else {
+                            var obj = Mensagem(_email, _senha);
+                            Navigator.pushNamed(context, "/perfil",
+                                arguments: obj);
+                          }
                         },
                         padding: EdgeInsets.all(0.0),
                       ),
