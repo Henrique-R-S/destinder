@@ -31,6 +31,10 @@ class _PrincipalState extends State<Principal> {
                 child: TabBar(
                   indicatorColor: Colors.lightBlue[300],
                   tabs: [
+                    //
+                    // TABBAR LAYOUT
+                    //
+
                     Tab(
                       icon: Icon(
                         Icons.account_circle,
@@ -56,12 +60,19 @@ class _PrincipalState extends State<Principal> {
             Expanded(
               child: TabBarView(
                 children: <Widget>[
+                  //
+                  // TELA DE PERFIL
+                  //
+
                   Container(
                     alignment: Alignment.center,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Icon(Icons.account_circle, size: 128.0),
+                        CircleAvatar(
+                          backgroundImage: AssetImage("images/foto_perfil.jpg"),
+                          radius: 60.0,
+                        ),
                         Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -80,7 +91,7 @@ class _PrincipalState extends State<Principal> {
                               Icon(Icons.edit),
                               Expanded(child: Container())
                             ]),
-                            SizedBox(
+                        SizedBox(
                           height: 20.0,
                         ),
                         Divider(),
@@ -110,7 +121,7 @@ class _PrincipalState extends State<Principal> {
                               Column(
                                 children: <Widget>[
                                   Icon(Icons.add_a_photo,
-                                      size: 40.0, color: Colors.lightBlue[700]),
+                                      size: 50.0, color: Colors.lightBlue[700]),
                                   Text(
                                     "Adicionar Mídia".toUpperCase(),
                                     style: TextStyle(
@@ -160,13 +171,74 @@ class _PrincipalState extends State<Principal> {
                       ],
                     ),
                   ),
+
+                  //
+                  // TELA DE MATCHES
+                  //
+
                   Center(
-                    child: Icon(
-                      Icons.ac_unit,
-                      size: 64.0,
-                      color: Colors.lightBlue,
+                    child: Card(
+                      child: Container(
+                        decoration: new BoxDecoration(
+                          image: new DecorationImage(
+                            image: new AssetImage('images/garota.jpg'),
+                            fit: BoxFit.cover,
+                            alignment: Alignment.center,
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            ListTile(
+                              
+                              title: Text(
+                                "Fulana Da Silva",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                              subtitle: Text(
+                                "Informações da pessoa",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                            ),
+                            ButtonBar(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                RaisedButton(
+                                  color: Colors.red,
+                                  onPressed: () {},
+                                  child: Icon(
+                                    Icons.arrow_left,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                RaisedButton(
+                                  color: Colors.blue,
+                                  onPressed: () {},
+                                  child: Icon(Icons.arrow_drop_up,
+                                      color: Colors.white),
+                                ),
+                                RaisedButton(
+                                  color: Colors.green,
+                                  onPressed: () {},
+                                  child: Icon(Icons.arrow_right,
+                                      color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
+
+                  //
+                  // TELA DE MENSAGENS
+                  //
+
                   Center(
                     child: Icon(
                       Icons.message,
