@@ -61,38 +61,101 @@ class _PrincipalState extends State<Principal> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Icon(Icons.account_circle, size: 64.0),
-                        Row(children: <Widget>[
-                          Text(
-                            "Nome: " + dados.nome,
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          SizedBox(height: 20),
-                          Text(
-                            "Data Nascimento: " + dados.dtNascimento,
-                            style: TextStyle(fontSize: 16),
-                          ),
-                        ]),
-                        Expanded(
-                          child: Container(
-                            height: 2.0,
-                            decoration: BoxDecoration(color: Colors.grey),
-                          ),
+                        Icon(Icons.account_circle, size: 128.0),
+                        Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Expanded(child: Container()),
+                              Text(
+                                dados.nome + ", ",
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                dados.dtNascimento,
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                              Icon(Icons.edit),
+                              Expanded(child: Container())
+                            ]),
+                            SizedBox(
+                          height: 20.0,
+                        ),
+                        Divider(),
+                        SizedBox(
+                          height: 20.0,
                         ),
                         Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                          Icon(Icons.settings, size: 32.0),
-                          Icon(Icons.add_a_photo, size: 40.0, color: Colors.lightBlue[700]),
-                          Icon(Icons.edit, size: 32.0)
-                        ]),
-                        SizedBox(height: 60),
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Column(
+                                children: <Widget>[
+                                  Icon(Icons.settings,
+                                      size: 20.0, color: Colors.grey),
+                                  Text(
+                                    "Configurações".toUpperCase(),
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.grey),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Icon(Icons.add_a_photo,
+                                      size: 40.0, color: Colors.lightBlue[700]),
+                                  Text(
+                                    "Adicionar Mídia".toUpperCase(),
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.grey),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Icon(Icons.edit,
+                                      size: 20.0, color: Colors.grey),
+                                  Text(
+                                    "Editar\nInformações".toUpperCase(),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.grey),
+                                  ),
+                                ],
+                              ),
+                            ]),
+                        Expanded(child: Container()),
                         RaisedButton(
-                          child: Text("Voltar"),
+                          textColor: Colors.lightBlue[700],
+                          color: Colors.white,
+                          child: Text(
+                            "Voltar".toUpperCase(),
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(100.0),
+                            side: BorderSide(color: Colors.transparent),
+                          ),
                           onPressed: () {
                             Navigator.pop(context);
                           },
+                        ),
+                        SizedBox(
+                          height: 40.0,
                         ),
                       ],
                     ),
