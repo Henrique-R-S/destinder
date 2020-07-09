@@ -1,14 +1,7 @@
-class Mensagem {
+class DadosUsuario {
   final String email;
-  final String senha;
+  final String nome;
+  final String dtNascimento;
 
-  Mensagem(this.email, this.senha);
-}
-
-class Usuario {
-  var icone;
-  final String titulo;
-  final String subtitulo;
-
-  Usuario(this.icone, this.titulo, this.subtitulo);
+  DadosUsuario(this.email, this.nome, this.dtNascimento);
 }

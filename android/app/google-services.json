@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "401077113300",
+    "firebase_url": "https://destinder-c1ac2.firebaseio.com",
+    "project_id": "destinder-c1ac2",
+    "storage_bucket": "destinder-c1ac2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401077113300:android:30ad87abba1e9cfc0b8641",
+        "android_client_info": {
+          "package_name": "com.example.projeto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "401077113300-vnt5d6hevdk52nllbbcet500bv80qluu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmzdLtAmwcVmYcNq_kb0gzz2UqLMlxux8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "401077113300-vnt5d6hevdk52nllbbcet500bv80qluu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

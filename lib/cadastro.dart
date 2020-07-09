@@ -1,4 +1,55 @@
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dialogs/flutter_dialogs.dart';
+import 'package:projeto/alerta.dart';
+import 'caixaDeTexto.dart';
+
+class DadosUsuario {
+  //Atributos
+
+  String _nome;
+  String _email;
+  String _dtNascimento;
+  String _senha;
+
+  //Construtor
+  DadosUsuario(this._nome, this._email, this._dtNascimento, this._senha);
+
+  //Getters
+
+  String get nome => _nome;
+  String get email => _email;
+  String get dtNascimento => _dtNascimento;
+  String get senha => _senha;
+
+  DadosUsuario.map(dynamic obj) {
+    this._nome = obj['nome'];
+    this._email = obj['email'];
+    this._dtNascimento = obj['dtNascimento'];
+    this._senha = obj['senha'];
+  }
+
+  //Converter os dados para um Mapa
+  Map<String, dynamic> toMap() {
+    var map = Map<String, dynamic>();
+
+    map["nome"] = _nome;
+    map["email"] = _email;
+    map["dtNascimento"] = _dtNascimento;
+    map["senha"] = _senha;
+    return map;
+  }
+
+  //Converter um Mapa para o modelo de dados
+  DadosUsuario.fromMap(Map<String, dynamic> map) {
+    this._nome = map["nome"];
+    this._email = map["email"];
+    this._dtNascimento = map["dtNascimento"];
+    this._senha = map["senha"];
+  }
+}
 
 //
 // Cadastro
@@ -10,6 +61,15 @@ class Cadastro extends StatefulWidget {
 }
 
 class _CadastroState extends State<Cadastro> {
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  TextEditingController _nome = TextEditingController();
+  TextEditingController _email = TextEditingController();
+  TextEditingController _senha = TextEditingController();
+  TextEditingController _dtNascimento = TextEditingController();
+
+  final db = Firestore.instance;
+  final String colecao = "Usuarios";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,90 +93,88 @@ class _CadastroState extends State<Cadastro> {
         ),
         padding: EdgeInsets.all(30),
         alignment: Alignment.center,
-        child: ListView(
-          children: <Widget>[
-            TextField(
-              onChanged: null,
-              keyboardType: TextInputType.emailAddress,
-              style: TextStyle(color: Colors.black),
-              decoration: InputDecoration(
-                icon: Icon(Icons.person),
-                labelText: "Nome",
-                border: OutlineInputBorder(
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            children: <Widget>[
+              caixaDeTexto(
+                  "Nome", _nome, TextInputType.text, Icons.person, false),
+              SizedBox(height: 10),
+              caixaDeTexto("Data Nascimento", _dtNascimento,
+                  TextInputType.datetime, Icons.date_range, false),
+              SizedBox(height: 10),
+              caixaDeTexto("Email", _email, TextInputType.emailAddress,
+                  Icons.person, false),
+              SizedBox(height: 10),
+              caixaDeTexto(
+                  "Senha", _senha, TextInputType.text, Icons.lock, true),
+              SizedBox(height: 10),
+              RaisedButton(
+                textColor: Colors.lightBlue[700],
+                color: Colors.white,
+                child: Text(
+                  "Cadastrar".toUpperCase(),
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100.0),
+                  side: BorderSide(color: Colors.transparent),
+                ),
+                onPressed: () {
+                  if (_formKey.currentState.validate()) {
+                    inserir(
+                        context,
+                        DadosUsuario(_nome.text, _email.text,
+                            _dtNascimento.text, textToMd5(_senha.text)));
+                    FocusScope.of(context)
+                                      .requestFocus(new FocusNode());       
+                    alerta(context, "Pronto!",
+                                      "Cadastro realizado com sucesso!");
+                    Navigator.pushReplacementNamed(context, "/login");
+                  } else {
+                    FocusScope.of(context).requestFocus(new FocusNode());
+                    alerta(context, "Dados inválidos!",
+                        "Por favor tente novamente.");
+                  }
+                },
+                padding: EdgeInsets.all(0.0),
+              ),
+              SizedBox(width: 10),
+              Center(
+                child: Text(
+                  "*Ao clicar em Cadastrar, você concorda com os nossos ",
+                  style: TextStyle(fontSize: 15, color: Colors.white),
+                  textAlign: TextAlign.center,
                 ),
               ),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 10),
-            TextField(
-              onChanged: null,
-              keyboardType: TextInputType.datetime,
-              style: TextStyle(color: Colors.black),
-              decoration: InputDecoration(
-                icon: Icon(Icons.person),
-                labelText: "Data de nascimento",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(100.0),
+              GestureDetector(
+                child: Center(
+                  child: Text(
+                    "Termos e Política de Privacidade.",
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      color: Colors.indigo,
+                    ),
+                  ),
                 ),
               ),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 10),
-            TextField(
-              onChanged: null,
-              keyboardType: TextInputType.emailAddress,
-              style: TextStyle(color: Colors.black),
-              decoration: InputDecoration(
-                icon: Icon(Icons.message),
-                labelText: "E-mail",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(100.0),
-                ),
-              ),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 10),
-            TextField(
-              onChanged: null,
-              obscureText: true,
-              keyboardType: TextInputType.visiblePassword,
-              decoration: InputDecoration(
-                icon: Icon(Icons.lock),
-                labelText: "Senha",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(100.0),
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-              ),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 10),
-            RaisedButton(
-              textColor: Colors.lightBlue[700],
-              color: Colors.white,
-              child: Text(
-                "Cadastrar".toUpperCase(),
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(100.0),
-                side: BorderSide(color: Colors.transparent),
-              ),
-              onPressed: () {},
-              padding: EdgeInsets.all(0.0),
-            ),
-            SizedBox(width: 10),
-            Center(
-              child: Text(
-                "*Ao clicar em Cadastrar, você concorda com os nossos Termos e Política de Privacidade.",
-                style: TextStyle(fontSize: 15, color: Colors.white),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  void inserir(BuildContext context, DadosUsuario dadosUsuario) async {
+    await db.collection("Usuarios").document(dadosUsuario.email).setData({
+      "nome": dadosUsuario.nome,
+      "dtNascimento": dadosUsuario.dtNascimento,
+      "senha": dadosUsuario.senha,
+    });
+  }
+
+  // Realiza criptografia da senha
+  String textToMd5(String text) {
+    return md5.convert(utf8.encode(text)).toString();
   }
 }

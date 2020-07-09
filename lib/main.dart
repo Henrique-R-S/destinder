@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projeto/login.dart';
 import 'package:projeto/recuperacao.dart';
 import 'package:projeto/cadastro.dart';
-import 'package:projeto/perfil.dart';
+import 'package:projeto/principal.dart';
 
 //
 // CÓDIGO INICIAL
@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
       initialRoute: "/login",
       routes: {
         "/login": (context) => Login(),
-        "/perfil": (context) => Perfil(),
+        "/principal": (context) => Principal(),
         "/cadastro": (context) => Cadastro(),
         "/recuperacao": (context) => Recuperacao(),
       },

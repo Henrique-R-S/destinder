@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 
-caixaDeTexto(rotulo, controle, tipo, icone, obscuro) {
+caixaDeTexto(
+  rotulo,
+  controle,
+  tipo,
+  icone,
+  obscuro,
+) {
   return Container(
     height: 60.0,
     child: TextFormField(
       // Valida a entrada
+      onChanged: (text) {
+        controle = text;
+      },
       validator: (value) {
         return (value.isEmpty) ? "Insira seus dados!" : null;
       },
