@@ -190,7 +190,6 @@ class _PrincipalState extends State<Principal> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             ListTile(
-                              
                               title: Text(
                                 "Fulana Da Silva",
                                 style: TextStyle(
@@ -218,14 +217,18 @@ class _PrincipalState extends State<Principal> {
                                 RaisedButton(
                                   color: Colors.blue,
                                   onPressed: () {},
-                                  child: Icon(Icons.arrow_drop_up,
-                                      color: Colors.white),
+                                  child: Icon(
+                                    Icons.arrow_drop_up,
+                                    color: Colors.white,
+                                  ),
                                 ),
                                 RaisedButton(
                                   color: Colors.green,
                                   onPressed: () {},
-                                  child: Icon(Icons.arrow_right,
-                                      color: Colors.white),
+                                  child: Icon(
+                                    Icons.arrow_right,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ],
                             ),
@@ -239,13 +242,71 @@ class _PrincipalState extends State<Principal> {
                   // TELA DE MENSAGENS
                   //
 
-                  Center(
-                    child: Icon(
-                      Icons.message,
-                      size: 64.0,
-                      color: Colors.lightBlue,
-                    ),
-                  ),
+                  ListView(
+                    padding: const EdgeInsets.all(8),
+                    children: <Widget>[
+                      Card(
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: AssetImage("images/garota.jpg"),
+                          ),
+                          title: Text('Conversa 1'),
+                          subtitle: Text('Última mensagem da conversa'),
+                          trailing: Icon(Icons.more_vert),
+                        ),
+                      ),
+                      Card(
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: AssetImage("images/garota.jpg"),
+                          ),
+                          title: Text('Conversa 2'),
+                          subtitle: Text('Última mensagem da conversa'),
+                          trailing: Icon(Icons.more_vert),
+                        ),
+                      ),
+                      Card(
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: AssetImage("images/garota.jpg"),
+                          ),
+                          title: Text('Conversa 3'),
+                          subtitle: Text('Última mensagem da conversa'),
+                          trailing: Icon(Icons.more_vert),
+                        ),
+                      ),
+                      Card(
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: AssetImage("images/garota.jpg"),
+                          ),
+                          title: Text('Conversa 4'),
+                          subtitle: Text('Última mensagem da conversa'),
+                          trailing: Icon(Icons.more_vert),
+                        ),
+                      ),
+                      Card(
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: AssetImage("images/garota.jpg"),
+                          ),
+                          title: Text('Conversa 5'),
+                          subtitle: Text('Última mensagem da conversa'),
+                          trailing: Icon(Icons.more_vert),
+                        ),
+                      ),
+                      Card(
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: AssetImage("images/garota.jpg"),
+                          ),
+                          title: Text('Conversa 6'),
+                          subtitle: Text('Última mensagem da conversa'),
+                          trailing: Icon(Icons.more_vert),
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),
