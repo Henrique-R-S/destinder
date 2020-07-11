@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:projeto/alerta.dart';
-import 'package:projeto/caixaDeTexto.dart';
 import 'package:projeto/dadosUsuario.dart';
 
 //
@@ -150,7 +149,7 @@ class _LoginState extends State<Login> {
                           ),
                           onPressed: () async {
                             if (_formKey.currentState.validate()) {
-                              var busca = await db
+                              var busca = db
                                   .collection("Usuarios")
                                   .document(_email);
                               busca.get().then((document) {

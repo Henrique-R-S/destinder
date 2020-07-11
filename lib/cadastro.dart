@@ -2,8 +2,6 @@ import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dialogs/flutter_dialogs.dart';
-import 'package:projeto/alerta.dart';
 import 'caixaDeTexto.dart';
 
 class DadosUsuario {
@@ -77,91 +75,99 @@ class _CadastroState extends State<Cadastro> {
         title: Text("Cadastro"),
         backgroundColor: Colors.indigo[400],
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height * 100,
-        width: MediaQuery.of(context).size.width * 100,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: <Color>[
-              Colors.indigo[400],
-              Colors.cyan,
-              Colors.lightBlue[300],
-            ],
-          ),
-        ),
-        padding: EdgeInsets.all(30),
-        alignment: Alignment.center,
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            children: <Widget>[
-              caixaDeTexto(
-                  "Nome", _nome, TextInputType.text, Icons.person, false),
-              SizedBox(height: 10),
-              caixaDeTexto("Data Nascimento", _dtNascimento,
-                  TextInputType.datetime, Icons.date_range, false),
-              SizedBox(height: 10),
-              caixaDeTexto("Email", _email, TextInputType.emailAddress,
-                  Icons.person, false),
-              SizedBox(height: 10),
-              caixaDeTexto(
-                  "Senha", _senha, TextInputType.text, Icons.lock, true),
-              SizedBox(height: 10),
-              RaisedButton(
-                textColor: Colors.lightBlue[700],
-                color: Colors.white,
-                child: Text(
-                  "Cadastrar".toUpperCase(),
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100.0),
-                  side: BorderSide(color: Colors.transparent),
-                ),
-                onPressed: () {
-                  if (_formKey.currentState.validate()) {
-                    inserir(
-                        context,
-                        DadosUsuario(_nome.text, _email.text,
-                            _dtNascimento.text, textToMd5(_senha.text)));
-                    FocusScope.of(context)
-                                      .requestFocus(new FocusNode());       
-                    alerta(context, "Pronto!",
-                                      "Cadastro realizado com sucesso!");
-                    Navigator.pushReplacementNamed(context, "/login");
-                  } else {
-                    FocusScope.of(context).requestFocus(new FocusNode());
-                    alerta(context, "Dados inválidos!",
-                        "Por favor tente novamente.");
-                  }
-                },
-                padding: EdgeInsets.all(0.0),
-              ),
-              SizedBox(width: 10),
-              Center(
-                child: Text(
-                  "*Ao clicar em Cadastrar, você concorda com os nossos ",
-                  style: TextStyle(fontSize: 15, color: Colors.white),
-                  textAlign: TextAlign.center,
+      body: StreamBuilder<Object>(
+          stream: null,
+          builder: (context, snapshot) {
+            return Container(
+              height: MediaQuery.of(context).size.height * 100,
+              width: MediaQuery.of(context).size.width * 100,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: <Color>[
+                    Colors.indigo[400],
+                    Colors.cyan,
+                    Colors.lightBlue[300],
+                  ],
                 ),
               ),
-              GestureDetector(
-                child: Center(
-                  child: Text(
-                    "Termos e Política de Privacidade.",
-                    style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      color: Colors.indigo,
+              padding: EdgeInsets.all(30),
+              alignment: Alignment.center,
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    caixaDeTexto(
+                        "Nome", _nome, TextInputType.text, Icons.person, false),
+                    SizedBox(height: 10),
+                    caixaDeTexto("Data Nascimento", _dtNascimento,
+                        TextInputType.datetime, Icons.date_range, false),
+                    SizedBox(height: 10),
+                    caixaDeTexto("Email", _email, TextInputType.emailAddress,
+                        Icons.email, false),
+                    SizedBox(height: 10),
+                    caixaDeTexto(
+                        "Senha", _senha, TextInputType.text, Icons.lock, true),
+                    SizedBox(height: 10),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 100,
+                      child: RaisedButton(
+                        textColor: Colors.lightBlue[700],
+                        color: Colors.white,
+                        child: Text(
+                          "Cadastrar".toUpperCase(),
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(100.0),
+                          side: BorderSide(color: Colors.transparent),
+                        ),
+                        onPressed: () {
+                          if (_formKey.currentState.validate()) {
+                            inserir(
+                                context,
+                                DadosUsuario(
+                                    _nome.text,
+                                    _email.text,
+                                    _dtNascimento.text,
+                                    textToMd5(_senha.text)));
+                          } else {
+                            Scaffold.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text("Falha ao criar o cadstro!"),
+                                backgroundColor: Colors.redAccent,
+                              ),
+                            );
+                          }
+                        },
+                        padding: EdgeInsets.all(0.0),
+                      ),
                     ),
-                  ),
+                    SizedBox(width: 10),
+                    Center(
+                      child: Text(
+                        "*Ao clicar em Cadastrar, você concorda com os nossos ",
+                        style: TextStyle(fontSize: 15, color: Colors.white),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    GestureDetector(
+                      child: Center(
+                        child: Text(
+                          "Termos e Política de Privacidade.",
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            color: Colors.indigo,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
+            );
+          }),
     );
   }
 
@@ -171,6 +177,13 @@ class _CadastroState extends State<Cadastro> {
       "dtNascimento": dadosUsuario.dtNascimento,
       "senha": dadosUsuario.senha,
     });
+    Scaffold.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Cadastro realizado com sucesso!"),
+        backgroundColor: Colors.redAccent,
+      ),
+    );
+    Navigator.pushReplacementNamed(context, "/login");
   }
 
   // Realiza criptografia da senha
