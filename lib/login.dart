@@ -18,8 +18,8 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   //atributos para receber dados informados
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  var _email = "";
-  var _senha = "";
+  TextEditingController email = new TextEditingController();
+  TextEditingController senha = new TextEditingController();
 
   FocusNode myFocusNode = new FocusNode();
 
@@ -82,11 +82,9 @@ class _LoginState extends State<Login> {
                       height: 50.0,
                       width: 60.0),
                   SizedBox(height: 20),
-                  TextField(
+                  TextFormField(
                     // Valida a entrada
-                    onChanged: (text) {
-                      _email = text;
-                    },
+                    controller: email,
 
                     keyboardType: TextInputType.emailAddress,
                     style: TextStyle(color: Colors.black),
@@ -109,9 +107,7 @@ class _LoginState extends State<Login> {
                   SizedBox(height: 20),
                   TextField(
                     // Valida a entrada
-                    onChanged: (text) {
-                      _senha = text;
-                    },
+                    controller: senha,
 
                     obscureText: true,
                     keyboardType: TextInputType.text,
@@ -149,20 +145,19 @@ class _LoginState extends State<Login> {
                           ),
                           onPressed: () async {
                             if (_formKey.currentState.validate()) {
-                              var busca = db
-                                  .collection("Usuarios")
-                                  .document(_email);
+                              var busca =
+                                  db.collection("Usuarios").document(email.text);
                               busca.get().then((document) {
                                 if (document.exists &&
-                                    document.data["senha"] == textToMd5(_senha))
+                                    document.data["senha"] == textToMd5(senha.text))
                                   Navigator.pushNamed(context, "/principal",
                                       arguments: DadosUsuario(
-                                          _email,
+                                          email.text,
                                           document.data["nome"],
                                           document.data["dtNascimento"]));
                                 else if (document.exists &&
                                     document.data["senha"] !=
-                                        textToMd5(_senha)) {
+                                        textToMd5(senha.text)) {
                                   FocusScope.of(context)
                                       .requestFocus(new FocusNode());
                                   alerta(context, "Senha Incorreta!",

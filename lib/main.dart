@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projeto/configuracoes.dart';
 import 'package:projeto/login.dart';
 import 'package:projeto/recuperacao.dart';
 import 'package:projeto/cadastro.dart';
@@ -29,6 +30,7 @@ class _MyAppState extends State<MyApp> {
         "/principal": (context) => Principal(),
         "/cadastro": (context) => Cadastro(),
         "/recuperacao": (context) => Recuperacao(),
+        "/configuracoes": (context) => Configuracoes(),
       },
     );
   }

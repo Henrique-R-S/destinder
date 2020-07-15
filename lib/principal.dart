@@ -19,6 +19,8 @@ class _PrincipalState extends State<Principal> {
   Widget build(BuildContext context) {
     final DadosUsuario dados = ModalRoute.of(context).settings.arguments;
 
+    
+
     return Scaffold(
       body: DefaultTabController(
         length: 3,
@@ -79,16 +81,10 @@ class _PrincipalState extends State<Principal> {
                             children: <Widget>[
                               Expanded(child: Container()),
                               Text(
-                                dados.nome + ", ",
+                                dados.nome + ", " + dados.dtNascimento,
                                 style: TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.bold),
                               ),
-                              Text(
-                                dados.dtNascimento,
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                              Icon(Icons.edit),
                               Expanded(child: Container())
                             ]),
                         SizedBox(
@@ -103,11 +99,58 @@ class _PrincipalState extends State<Principal> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Column(
-                                children: <Widget>[
-                                  Icon(Icons.settings,
-                                      size: 20.0, color: Colors.grey),
+                                children: [
+                                  RawMaterialButton(
+                                    elevation: 2.0,
+                                    fillColor: Colors.white,
+                                    shape: CircleBorder(),
+                                    child: Icon(Icons.settings,
+                                        size: 20.0, color: Colors.grey),
+                                    onPressed: () {
+                                      Navigator.of(context)
+                                          .pushNamed("/configuracoes");
+                                    },
+                                  ),
+                                  SizedBox(height: 10.0),
                                   Text(
                                     "Configurações".toUpperCase(),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.grey,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        colors: <Color>[
+                                          Colors.indigo[400],
+                                          Colors.cyan,
+                                          Colors.lightBlue[300],
+                                        ],
+                                      ),
+                                    ),
+                                    child: RawMaterialButton(
+                                      child: Icon(Icons.add_a_photo,
+                                          size: 30.0, color: Colors.white),
+                                      shape: CircleBorder(),
+                                      onPressed: () {},
+                                    ),
+                                  ),
+                                  SizedBox(height: 10.0),
+                                  Text(
+                                    "Mídia".toUpperCase(),
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
@@ -120,26 +163,17 @@ class _PrincipalState extends State<Principal> {
                               ),
                               Column(
                                 children: <Widget>[
-                                  Icon(Icons.add_a_photo,
-                                      size: 50.0, color: Colors.lightBlue[700]),
-                                  Text(
-                                    "Adicionar Mídia".toUpperCase(),
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.grey),
+                                  RawMaterialButton(
+                                    elevation: 2.0,
+                                    fillColor: Colors.white,
+                                    shape: CircleBorder(),
+                                    child: Icon(Icons.edit,
+                                        size: 20.0, color: Colors.grey),
+                                    onPressed: () {},
                                   ),
-                                ],
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Column(
-                                children: <Widget>[
-                                  Icon(Icons.edit,
-                                      size: 20.0, color: Colors.grey),
+                                  SizedBox(height: 10.0),
                                   Text(
-                                    "Editar\nInformações".toUpperCase(),
+                                    "Informações".toUpperCase(),
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontSize: 16,
@@ -150,20 +184,23 @@ class _PrincipalState extends State<Principal> {
                               ),
                             ]),
                         Expanded(child: Container()),
-                        RaisedButton(
-                          textColor: Colors.lightBlue[700],
-                          color: Colors.white,
-                          child: Text(
-                            "Voltar".toUpperCase(),
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                        Container(
+                          width:  MediaQuery.of(context).size.width * 0.4,
+                          child: RaisedButton(
+                            textColor: Colors.lightBlue[700],
+                            color: Colors.white,
+                            child: Text(
+                              "Sair".toUpperCase(),
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100.0),
+                              side: BorderSide(color: Colors.transparent),
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
                           ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(100.0),
-                            side: BorderSide(color: Colors.transparent),
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
                         ),
                         SizedBox(
                           height: 40.0,
@@ -177,62 +214,67 @@ class _PrincipalState extends State<Principal> {
                   //
 
                   Center(
-                    child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
                       child: Container(
-                        decoration: new BoxDecoration(
-                          image: new DecorationImage(
-                            image: new AssetImage('images/garota.jpg'),
-                            fit: BoxFit.cover,
-                            alignment: Alignment.center,
-                          ),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            ListTile(
-                              title: Text(
-                                "Fulana Da Silva",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                              subtitle: Text(
-                                "Informações da pessoa",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
+                        child: Card(
+                          child: Container(
+                            decoration: new BoxDecoration(
+                              image: new DecorationImage(
+                                image: new AssetImage('images/garota.jpg'),
+                                fit: BoxFit.cover,
+                                alignment: Alignment.center,
                               ),
                             ),
-                            ButtonBar(
-                              mainAxisSize: MainAxisSize.min,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
-                                RaisedButton(
-                                  color: Colors.red,
-                                  onPressed: () {},
-                                  child: Icon(
-                                    Icons.arrow_left,
-                                    color: Colors.white,
+                                ListTile(
+                                  title: Text(
+                                    "Fulana Da Silva",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  ),
+                                  subtitle: Text(
+                                    "Informações da pessoa",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
                                   ),
                                 ),
-                                RaisedButton(
-                                  color: Colors.blue,
-                                  onPressed: () {},
-                                  child: Icon(
-                                    Icons.arrow_drop_up,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                RaisedButton(
-                                  color: Colors.green,
-                                  onPressed: () {},
-                                  child: Icon(
-                                    Icons.arrow_right,
-                                    color: Colors.white,
-                                  ),
+                                ButtonBar(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    RaisedButton(
+                                      color: Colors.red,
+                                      onPressed: () {},
+                                      child: Icon(
+                                        Icons.arrow_left,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    RaisedButton(
+                                      color: Colors.blue,
+                                      onPressed: () {},
+                                      child: Icon(
+                                        Icons.arrow_drop_up,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    RaisedButton(
+                                      color: Colors.green,
+                                      onPressed: () {},
+                                      child: Icon(
+                                        Icons.arrow_right,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                          ],
+                          ),
                         ),
                       ),
                     ),
@@ -245,66 +287,18 @@ class _PrincipalState extends State<Principal> {
                   ListView(
                     padding: const EdgeInsets.all(8),
                     children: <Widget>[
-                      Card(
+                      for(int i = 0; i < 10; i++)
+                        Card(
                         child: ListTile(
                           leading: CircleAvatar(
                             backgroundImage: AssetImage("images/garota.jpg"),
                           ),
-                          title: Text('Conversa 1'),
+                          title: Text('Conversa ${i+1}'),
                           subtitle: Text('Última mensagem da conversa'),
                           trailing: Icon(Icons.more_vert),
                         ),
                       ),
-                      Card(
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            backgroundImage: AssetImage("images/garota.jpg"),
-                          ),
-                          title: Text('Conversa 2'),
-                          subtitle: Text('Última mensagem da conversa'),
-                          trailing: Icon(Icons.more_vert),
-                        ),
-                      ),
-                      Card(
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            backgroundImage: AssetImage("images/garota.jpg"),
-                          ),
-                          title: Text('Conversa 3'),
-                          subtitle: Text('Última mensagem da conversa'),
-                          trailing: Icon(Icons.more_vert),
-                        ),
-                      ),
-                      Card(
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            backgroundImage: AssetImage("images/garota.jpg"),
-                          ),
-                          title: Text('Conversa 4'),
-                          subtitle: Text('Última mensagem da conversa'),
-                          trailing: Icon(Icons.more_vert),
-                        ),
-                      ),
-                      Card(
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            backgroundImage: AssetImage("images/garota.jpg"),
-                          ),
-                          title: Text('Conversa 5'),
-                          subtitle: Text('Última mensagem da conversa'),
-                          trailing: Icon(Icons.more_vert),
-                        ),
-                      ),
-                      Card(
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            backgroundImage: AssetImage("images/garota.jpg"),
-                          ),
-                          title: Text('Conversa 6'),
-                          subtitle: Text('Última mensagem da conversa'),
-                          trailing: Icon(Icons.more_vert),
-                        ),
-                      ),
+                      
                     ],
                   )
                 ],
