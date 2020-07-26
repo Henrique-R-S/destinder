@@ -17,4 +17,4 @@
 
 - Protótipo da tela principal:
 
-![image](https://user-images.githubusercontent.com/55239443/88482942-ee393200-cf3a-11ea-9963-8094d756d505.png)
+![image](https://user-images.githubusercontent.com/55239443/88483279-29d4fb80-cf3d-11ea-8b81-d403a202e461.png)
