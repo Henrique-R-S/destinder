@@ -3,7 +3,7 @@
 ## Aplicativo de relacionamentos (Paródia do Tinder)
 
 ### A idéia do aplicativo é ser uma rede "Anti-Social" do qual usuários que não se "gostem" sejam alertados sobre as suas localizações para evitar possíveis encontros na vida real.
-### A intenção é utilizar a tecnologia de GeoFencing para capturar a localização dos indivíduos e alertar caso eles adentrem um determinado perímetro (com uma distância delimitada pelo próprio usuário)
+### Será utilizado a tecnologia de GeoFencing para capturar a localização dos indivíduos e alertar caso eles adentrem um determinado perímetro (com uma distância delimitada pelo próprio usuário)
 
 ![image](https://user-images.githubusercontent.com/55239443/88482950-0315c580-cf3b-11ea-85ca-844d79978405.png)
 
