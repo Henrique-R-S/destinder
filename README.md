@@ -1,20 +1,29 @@
 # Destinder APP
 
-## Aplicativo de relacionamentos (Paródia do Tinder)
+## Relationships App (Tinder's parody)
 
-### A idéia do aplicativo é ser uma rede "Anti-Social" do qual usuários que não se "gostem" sejam alertados sobre as suas localizações para evitar possíveis encontros na vida real.
-### Será utilizado a tecnologia de GeoFencing para capturar a localização dos indivíduos e alertar caso eles adentrem um determinado perímetro (com uma distância delimitada pelo próprio usuário)
+### The idea of the application is to be an "Anti-Social" network that users who do not "like" each others are alerted about their locations to avoid possible encounters in real life.
+### GeoFencing technology will be used to capture the location of individuals and alert if they enter a certain perimeter (with a distance defined by the user)
 
 ![image](https://user-images.githubusercontent.com/55239443/88482950-0315c580-cf3b-11ea-85ca-844d79978405.png)
 
-- Tela de Login:
+## Build setup
 
-![image](https://user-images.githubusercontent.com/55239443/88482914-b500c200-cf3a-11ea-92c7-75d2c168a2be.png)
+```bash
+	# install dependencies
+	$ flutter pub get
+	
+	# run on your connected device with hot reload/restart
+	$ flutter run
+	
+	# (web mode) server with hot reload/restart at localhost:3000
+	$ flutter run -d web-server --web-port=3000
 
-- Tela de Cadastro:
+	# build apk
+	$ flutter build apk
+```
+For more information, visit [Flutter documentation](https://flutter.dev/docs)
 
-![image](https://user-images.githubusercontent.com/55239443/88482928-c3e77480-cf3a-11ea-86a0-8cb39e18b8f7.png)
+## Meta
 
-- Protótipo da tela principal:
-
-![image](https://user-images.githubusercontent.com/55239443/88483279-29d4fb80-cf3d-11ea-8b81-d403a202e461.png)
+Henrique Ribeiro – [@KadolTech](https://github.com/KadolTech)
