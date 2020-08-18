@@ -26,4 +26,4 @@ For more information, visit [Flutter documentation](https://flutter.dev/docs)
 
 ## Meta
 
-Henrique Ribeiro – [@KadolTech](https://github.com/KadolTech)
+Henrique Ribeiro – [@Henrique-R-S](https://github.com/Henrique-R-S/)
